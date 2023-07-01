@@ -1,18 +1,10 @@
-import { sql } from '@vercel/postgres'
+import { sql } from './db';
 
 export async function seed() {
-  const createTable = await sql`
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      image VARCHAR(255),
-      "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    );
-    `
+  await seedUsers();
+}
 
-  console.log(`Created "users" table`)
-
+const seedUsers = async () => {
   const users = await Promise.all([
     sql`
           INSERT INTO users (name, email, image)
@@ -29,11 +21,6 @@ export async function seed() {
           VALUES ('Steven Tey', 'stey@vercel.com', 'https://pbs.twimg.com/profile_images/1506792347840888834/dS-r50Je_400x400.jpg')
           ON CONFLICT (email) DO NOTHING;
       `,
-  ])
-  console.log(`Seeded ${users.length} users`)
-
-  return {
-    createTable,
-    users,
-  }
-}
+  ]);
+  console.log(`Seeded ${users.length} users`);
+};
