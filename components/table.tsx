@@ -1,14 +1,14 @@
-import { sql } from '@vercel/postgres';
 import { timeAgo } from '@/lib/utils';
 import Image from 'next/image';
 import RefreshButton from './refresh-button';
+import * as rpc from '../rpc';
 
 export default async function Table() {
   let data;
   const startTime = Date.now();
 
   try {
-    data = await sql`SELECT * FROM users`;
+    data = await rpc.users.getUsers();
   } catch (e) {
     throw new Error(`get users failed:` + e);
   }
