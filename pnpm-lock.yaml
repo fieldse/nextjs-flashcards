@@ -20,9 +20,6 @@ dependencies:
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.22)
-  dotenv:
-    specifier: ^16.3.1
-    version: 16.3.1
   eslint-config-next:
     specifier: 13.3.0
     version: 13.3.0(eslint@8.44.0)(typescript@5.0.4)
@@ -61,6 +58,9 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: ^5.60.1
     version: 5.60.1(eslint@8.44.0)(typescript@5.0.4)
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   eslint:
     specifier: ^8.44.0
     version: 8.44.0
@@ -847,7 +847,7 @@ packages:
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: false
+    dev: true
 
   /electron-to-chromium@1.4.377:
     resolution: {integrity: sha512-H3BYG6DW5Z+l0xcfXaicJGxrpA4kMlCxnN71+iNX+dBLkRMOdVJqFJiAmbNZZKA1zISpRg17JR03qGifXNsJtw==}
