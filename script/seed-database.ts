@@ -11,6 +11,7 @@ async function run() {
   loadEnvSettings();
 
   console.log('creating & seeding database...');
+  // TODO: run migrate up before we get here.
   try {
     await seed.seed();
   } catch (err) {
