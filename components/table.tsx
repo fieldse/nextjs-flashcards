@@ -5,12 +5,12 @@ import RefreshButton from './refresh-button';
 
 export default async function Table() {
   let data;
-  let startTime = Date.now();
+  const startTime = Date.now();
 
   try {
     data = await sql`SELECT * FROM users`;
-  } catch (e: any) {
-    throw new Error(`get users failed:` + e.message);
+  } catch (e) {
+    throw new Error(`get users failed:` + e);
   }
 
   const { rows: users } = data;
