@@ -4,7 +4,7 @@ exports.up = async (sql) => {
       id                        serial PRIMARY KEY,
       headword                  CHARACTER VARYING(255) NOT NULL,
       definition                TEXT NOT NULL,
-      headword_pronunciation    CHARACTER VARYING(255) NOT NULL,
+      headword_pronunciation    CHARACTER VARYING(255),
       headword_language         CHARACTER VARYING(10) DEFAULT 'en',
       definition_language       CHARACTER VARYING(10) DEFAULT 'en',
       updated_at                timestamp DEFAULT current_timestamp,
