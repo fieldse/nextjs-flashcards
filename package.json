@@ -10,7 +10,6 @@
     "start": "next start",
     "lint": "next lint",
     "db:seed": "ts-node --project ./tsconfig.json script/seed-database",
-    "db:test": "node ./lib/migrate.js test",
     "migrate": "node ./lib/migrate.js"
   },
   "dependencies": {
