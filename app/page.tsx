@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import UsersTable from '@/components/users-table';
-import UsersTablePlaceholder from '@/components/users-table-placeholder';
+import { UsersTable, UsersTablePlaceholder } from '@/components/users';
 
 export const runtime = 'edge';
 export const preferredRegion = 'home';

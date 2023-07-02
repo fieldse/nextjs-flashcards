@@ -1,12 +1,12 @@
 import { timeAgo } from '@/lib/utils';
 import Image from 'next/image';
-import RefreshButton from './refresh-button';
-import * as rpc from '../rpc';
+import { RefreshButton } from '../buttons';
+import * as rpc from '../../rpc';
 
 /**
  * Vertical table view of all users
  */
-export default async function UsersTable() {
+export async function UsersTable() {
   let data;
   const startTime = Date.now();
 
