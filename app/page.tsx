@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { UsersTable, UsersTablePlaceholder } from '@/components/users';
+import { CardsTable, CardsTablePlaceholder } from '@/components/cards';
 
 export const runtime = 'edge';
 export const preferredRegion = 'home';
@@ -16,9 +17,9 @@ export default function Home() {
       <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
         Flashcards app
       </h1>
-      <Suspense fallback={<UsersTablePlaceholder />}>
+      <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
-        <UsersTable />
+        <CardsTable />
       </Suspense>
 
       <div className="flex justify-center space-x-5 pt-10 mt-10 border-t border-gray-300 w-full max-w-xl text-gray-600">

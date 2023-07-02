@@ -34,13 +34,7 @@ export async function CardsTable() {
         {cards.map((card) => (
           <div key={card.headword} className="flex items-center justify-between py-3">
             <div className="flex items-center space-x-4">
-              <Image
-                src={'./note-icon.png'}
-                alt={card.headword}
-                width={48}
-                height={48}
-                className="rounded-full ring-1 ring-gray-900/5"
-              />
+              <Image src={'/note-icon.png'} alt={card.headword} width={48} height={48} />
               <div className="space-y-1">
                 <p className="font-medium leading-none">{card.headword}</p>
                 <p className="text-sm text-gray-500">{card.definition}</p>
@@ -50,7 +44,7 @@ export async function CardsTable() {
           </div>
         ))}
       </div>
-      <span className="text-xs text-gray-200 italic">
+      <span className="relative top-4 mb-0 mt-4 text-sm text-gray-400 italic">
         icon credit:{' '}
         <a
           href="https://www.flaticon.com/free-icons/files-and-folders"
