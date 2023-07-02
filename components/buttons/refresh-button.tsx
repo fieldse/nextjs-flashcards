@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 export function RefreshButton() {
   const router = useRouter();
@@ -19,7 +20,14 @@ export function RefreshButton() {
         });
       }}
     >
-      {isPending ? 'Refreshing...' : 'Refresh'}
+      {isPending ? (
+        'Refreshing...'
+      ) : (
+        <span className="text-gray-500">
+          <HiOutlineRefresh className="mr-1 inline-block" size={20} />
+          Refresh
+        </span>
+      )}
     </button>
   );
 }

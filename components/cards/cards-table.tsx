@@ -2,6 +2,7 @@ import { timeAgo } from '@/lib/utils';
 import Image from 'next/image';
 import { RefreshButton } from '../buttons';
 import * as rpc from '../../rpc';
+import { HiOutlineDocument } from 'react-icons/hi';
 
 /**
  * Vertical table view of all cards
@@ -34,7 +35,12 @@ export async function CardsTable() {
         {cards.map((card) => (
           <div key={card.headword} className="flex items-center justify-between py-3">
             <div className="flex items-center space-x-4">
-              <Image src={'/note-icon.png'} alt={card.headword} width={48} height={48} />
+              <span>
+                <HiOutlineDocument
+                  className="inline-block mr-1 w-12 h-12 text-blue-500"
+                  aria-valuetext={`${card.headword}-icon`}
+                />
+              </span>
               <div className="space-y-1">
                 <p className="font-medium leading-none">{card.headword}</p>
                 <p className="text-sm text-gray-500">{card.definition}</p>
@@ -44,15 +50,6 @@ export async function CardsTable() {
           </div>
         ))}
       </div>
-      <span className="relative top-4 mb-0 mt-4 text-sm text-gray-400 italic">
-        icon credit:{' '}
-        <a
-          href="https://www.flaticon.com/free-icons/files-and-folders"
-          title="files and folders icons"
-        >
-          Muhammad Atif - Flaticon
-        </a>
-      </span>
     </div>
   );
 }
