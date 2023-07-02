@@ -3,7 +3,10 @@ import Image from 'next/image';
 import RefreshButton from './refresh-button';
 import * as rpc from '../rpc';
 
-export default async function Table() {
+/**
+ * Vertical table view of all users
+ */
+export default async function UsersTable() {
   let data;
   const startTime = Date.now();
 
