@@ -4,14 +4,14 @@ import { sql } from '@vercel/postgres';
 /**
  * Get all decks
  */
-export async function getDecks() {
+export async function getAll() {
   return await sql`SELECT * FROM decks`;
 }
 
 /**
  * Get a single deck by id
  */
-export async function getDeck(id: string) {
+export async function get(id: string) {
   return await sql`SELECT * FROM decks WHERE id = ${id}`;
 }
 

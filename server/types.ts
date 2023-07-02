@@ -4,7 +4,7 @@ export type User = {
   name: string;
   email: string;
   image: string;
-  createdAt: string; // fixme: should be a date type
+  createdAt: Date;
 };
 
 export type Card = {
@@ -14,8 +14,8 @@ export type Card = {
   headwordPronunciation: string;
   headwordLanguage: string;
   definitionLanguage: string;
-  updatedAt: string;
-  createdAt: string; // fixme: should be a date type
+  updatedAt: Date;
+  createdAt: Date;
 };
 
 export type Deck = {
@@ -23,6 +23,6 @@ export type Deck = {
   title: string;
   description: string;
   parentDeckId?: number;
-  updatedAt: string;
-  createdAt: string; // fixme: should be a date type
+  updatedAt: Date;
+  createdAt: Date;
 };
