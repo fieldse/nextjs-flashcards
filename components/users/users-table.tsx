@@ -11,7 +11,7 @@ export async function UsersTable() {
   const startTime = Date.now();
 
   try {
-    data = await rpc.users.getUsers();
+    data = await rpc.users.getAll();
   } catch (e) {
     throw new Error(`get users failed:` + e);
   }
