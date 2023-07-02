@@ -1,4 +1,4 @@
-import { sql, wrapTransaction } from './db';
+import { sql, wrapTransaction } from './migrate/db';
 
 export async function seed() {
   console.log('Seeding users...');
