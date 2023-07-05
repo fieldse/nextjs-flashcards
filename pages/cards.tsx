@@ -3,14 +3,10 @@ import { CardsTable, CardsTablePlaceholder } from '@/components/cards';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
-export const runtime = 'edge';
-export const preferredRegion = 'home';
-export const dynamic = 'force-dynamic';
-
 /**
- * The main page of the app
+ * The Cards view
  */
-export function Cards() {
+export default function Cards() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
       <MainHeading>Cards</MainHeading>
