@@ -1,16 +1,13 @@
+'use server';
 import { Suspense } from 'react';
 import { CardsTable, CardsTablePlaceholder } from '@/components/cards';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
-export const runtime = 'edge';
-export const preferredRegion = 'home';
-export const dynamic = 'force-dynamic';
-
 /**
  * The Cards view
  */
-export default function Cards() {
+export default async function Cards() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
       <MainHeading>Cards</MainHeading>
