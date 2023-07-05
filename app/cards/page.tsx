@@ -1,20 +1,19 @@
 'use server';
-
-import { Suspense, useState } from 'react';
-import { UsersTable, UsersTablePlaceholder } from '@/components/users';
+import { Suspense } from 'react';
+import { CardsTable, CardsTablePlaceholder } from '.';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
 /**
- * The Users view
+ * The Cards view
  */
-export default async function Users() {
+export default async function Cards() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
-      <MainHeading>Users</MainHeading>
-      <Suspense fallback={<UsersTablePlaceholder />}>
+      <MainHeading>Cards</MainHeading>
+      <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
-        <UsersTable />
+        <CardsTable />
       </Suspense>
 
       <SubFooter />

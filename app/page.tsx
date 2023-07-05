@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { CardsTable, CardsTablePlaceholder } from '@/components/cards';
+import { CardsTable, CardsTablePlaceholder } from './cards';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 

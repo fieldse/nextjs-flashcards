@@ -1,5 +1,5 @@
 import { timeAgo } from '@/lib/utils';
-import { RefreshButton } from '../buttons';
+import { RefreshButton } from '@/components/buttons';
 import * as rpc from '../../rpc';
 import { HiOutlineDocument } from 'react-icons/hi';
 
@@ -8,25 +8,20 @@ import { HiOutlineDocument } from 'react-icons/hi';
  */
 export async function CardsTable() {
   let data;
-  const startTime = Date.now();
 
   try {
     data = await rpc.cards.getAll();
   } catch (e) {
     throw new Error(`get users failed:` + e);
   }
-
   const { rows: cards } = data;
-  const duration = Date.now() - startTime;
 
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold">All cards</h2>
-          <p className="text-sm text-gray-500">
-            Fetched {cards.length} cards in {duration}ms
-          </p>
+          <p className="text-sm text-gray-500">Fetched {cards.length} cards</p>
         </div>
         <RefreshButton />
       </div>
