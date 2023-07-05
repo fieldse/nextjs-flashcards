@@ -1,5 +1,4 @@
 import { timeAgo } from '@/lib/utils';
-import Image from 'next/image';
 import { RefreshButton } from '../buttons';
 import * as rpc from '../../rpc';
 import { HiOutlineDocument } from 'react-icons/hi';
