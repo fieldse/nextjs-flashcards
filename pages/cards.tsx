@@ -3,6 +3,10 @@ import { CardsTable, CardsTablePlaceholder } from '@/components/cards';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
+export const runtime = 'edge';
+export const preferredRegion = 'home';
+export const dynamic = 'force-dynamic';
+
 /**
  * The Cards view
  */

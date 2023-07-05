@@ -3,6 +3,10 @@ import { UsersTable, UsersTablePlaceholder } from '@/components/users';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
+export const runtime = 'edge';
+export const preferredRegion = 'home';
+export const dynamic = 'force-dynamic';
+
 /**
  * The Users view
  */
