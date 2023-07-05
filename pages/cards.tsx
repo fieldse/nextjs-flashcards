@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export function Cards() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
-      <MainHeading title="Cards" />
+      <MainHeading>Cards</MainHeading>
       <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
         <CardsTable />
