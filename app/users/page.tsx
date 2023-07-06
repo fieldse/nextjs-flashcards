@@ -6,7 +6,7 @@ import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
 /**
- * The Users view
+ * The Users overview
  */
 export default async function Users() {
   return (
