@@ -18,8 +18,6 @@ async function getData(): Promise<{ cards: Card[] }> {
  * The All Cards overview
  */
 export default async function CardsPage() {
-  const { cards } = await getData();
-
   return (
     <MainWrapper>
       <MainHeading>Cards</MainHeading>

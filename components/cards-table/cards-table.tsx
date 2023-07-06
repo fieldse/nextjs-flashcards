@@ -19,7 +19,7 @@ export function CardsTable({ cards }: { cards: Card[] }) {
       <div className="divide-y divide-gray-900/5">
         {cards.length ? (
           cards.map((card) => (
-            <Link key={card.headword} href={`/cards/${card.id}`}>
+            <Link key={card.headword} href={`/card/${card.id}`}>
               <div className="flex items-center justify-between py-3">
                 <div className="flex items-center space-x-4">
                   <span>
