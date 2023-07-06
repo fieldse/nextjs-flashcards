@@ -5,8 +5,8 @@ import { sql } from '@vercel/postgres';
 /**
  * Get all cards
  */
-export async function getAll() {
-  return await sql<Card>`SELECT * FROM cards`;
+export async function getAll(opts: { limit?: number } = {}) {
+  return await sql<Card>`SELECT * FROM cards LIMIT ${opts.limit || 50}`;
 }
 
 /**

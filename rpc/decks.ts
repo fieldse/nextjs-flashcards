@@ -5,14 +5,16 @@ import { sql } from '@vercel/postgres';
 /**
  * Get all decks
  */
-export async function getAll() {
-  return await sql<Deck>`SELECT * FROM decks`;
+export async function getAll(opts: { limit?: number } = {}) {
+  return await sql<Deck>`SELECT * FROM decks
+  LIMIT ${opts?.limit || 50}
+  `;
 }
 
 /**
  * Get all decks with card counts
  */
-export async function getAllWithCardCounts() {
+export async function getAllWithCardCounts(opts: { limit?: number } = {}) {
   return await sql<DeckWithCardCount>`
     SELECT 
       d.*,
@@ -20,6 +22,7 @@ export async function getAllWithCardCounts() {
     FROM decks d
     LEFT JOIN cards_decks cd ON cd.deck_id = d.id
     GROUP BY d.id
+    LIMIT ${opts?.limit || 50}
   `;
 }
 
@@ -27,7 +30,8 @@ export async function getAllWithCardCounts() {
  * Get a single deck by id
  */
 export async function get(id: string) {
-  return await sql<Deck>`SELECT * FROM decks WHERE id = ${id}`;
+  const { rows } = await sql<Deck>`SELECT * FROM decks WHERE id = ${id}`;
+  return rows[0];
 }
 
 /**
