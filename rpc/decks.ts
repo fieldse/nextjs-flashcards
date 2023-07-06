@@ -14,17 +14,12 @@ export async function getAll() {
  */
 export async function getAllWithCardCounts() {
   return await sql<DeckWithCardCount>`
-  SELECT 
-    d.*,
-    c.cardCount
-  FROM decks d
-  LEFT JOIN (
     SELECT 
-      deck.id "deck_id",
-      COUNT(*) "cardCount"
-    FROM cards cc
-    WHERE cc.deck_id = d.id
-  ) c ON c.deck_id = d.id
+      d.*,
+      COUNT(cd.*) "card_count"
+    FROM decks d
+    LEFT JOIN cards_decks cd ON cd.deck_id = d.id
+    GROUP BY d.id
   `;
 }
 
