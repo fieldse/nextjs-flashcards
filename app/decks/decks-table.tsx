@@ -1,5 +1,4 @@
 import { stripKebabCase, timeAgo } from '@/lib/utils';
-import { RefreshButton } from '@/components/buttons';
 import * as rpc from '../../rpc';
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { DeckWithCardCount } from '@/server/types';
@@ -25,26 +24,30 @@ export async function DecksTable() {
       <div className="flex justify-between items-center mb-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold">All decks</h2>
-          <p className="text-sm text-gray-500">Fetched {decks.length} cards</p>
+          <p className="text-sm text-gray-500">Total: {decks.length} decks</p>
         </div>
-        <RefreshButton />
       </div>
       <div className="divide-y divide-gray-900/5">
         {decks.map((deck) => (
-          <div key={deck.title} className="flex items-center justify-between py-3">
-            <div className="flex items-center space-x-4">
-              <span>
-                <HiOutlineBookOpen
-                  className="inline-block mr-1 w-12 h-12 text-blue-500"
-                  aria-valuetext={`${stripKebabCase(deck.title)}-icon`}
-                />
+          <div key={deck.title} className="flex items-start justify-between py-3">
+            <div className="flex items-center space-x-4 w-full">
+              <span className="flex flex-col">
+                {/* Deck title and icon */}
+                <span>
+                  <HiOutlineBookOpen
+                    className="inline-block mr-1 w-12 h-12 text-blue-500"
+                    aria-valuetext={`${stripKebabCase(deck.title)}-icon`}
+                  />
+                  <span className="text-xl font-semibold">{deck.title}</span>
+                </span>
+
+                {/* Card count, created date */}
+                <span className="w-full grow flex mt-6 leading-none space-between items-baseline">
+                  <span className="text-sm text-gray-400 grow">total cards: {deck.cardCount}</span>
+                  <span className="text-sm text-gray-500">{timeAgo(deck.createdAt)}</span>
+                </span>
               </span>
-              <div className="space-y-1">
-                <p className="font-medium leading-none">total cards:</p>
-                <p className="text-sm text-gray-500">{deck.cardCount}</p>
-              </div>
             </div>
-            <p className="text-sm text-gray-500">{timeAgo(deck.createdAt)}</p>
           </div>
         ))}
       </div>
