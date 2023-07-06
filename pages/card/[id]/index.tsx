@@ -2,7 +2,6 @@ import SingleCard from '@/components/single-card/single-card';
 import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
-import { Heading2 } from '@/components/headers';
 
 // Returns a single card view
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,10 +44,5 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
  * View for a single card page
  */
 export default function SingleCardPage({ card }: { card: Card }) {
-  return (
-    <div>
-      <Heading2>Should be a card here</Heading2>
-      <SingleCard card={card} />
-    </div>
-  );
+  return <SingleCard card={card} />;
 }
