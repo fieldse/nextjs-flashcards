@@ -26,3 +26,7 @@ export type Deck = {
   updatedAt: Date;
   createdAt: Date;
 };
+
+export type DeckWithCardCount = Deck & {
+  cardCount: number;
+};

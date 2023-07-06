@@ -5,15 +5,16 @@ import { User } from '../server/types';
 /**
  * Get all users
  */
-export async function getAll() {
-  return await sql<User>`SELECT * FROM users`;
+export async function getAll(opts: { limit?: number } = {}) {
+  return await sql<User>`SELECT * FROM users LIMIT ${opts.limit || 100}`;
 }
 
 /**
  * Get a single user by id
  */
 export async function get(id: string) {
-  return await sql<User>`SELECT * FROM users WHERE id = ${id}`;
+  const { rows } = await sql<User>`SELECT * FROM users WHERE id = ${id}`;
+  return rows[0];
 }
 
 /**

@@ -1,18 +1,16 @@
+'use server';
 import { Suspense } from 'react';
-import { CardsTable, CardsTablePlaceholder } from './cards';
+import { CardsTable, CardsTablePlaceholder } from '.';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
 
 /**
- * The main page of the app
+ * The All Cards overview
  */
-export default function MainPage() {
-  // placeholder for routing
-  // const currentPage: 'home' | 'cards' | 'decks' | 'users' = 'home';
-
+export default async function Cards() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
-      <MainHeading>Flashcards app</MainHeading>
+      <MainHeading>Cards</MainHeading>
       <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
         <CardsTable />
