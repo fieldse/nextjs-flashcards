@@ -3,7 +3,7 @@ import * as rpc from '../../rpc';
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { DeckWithCardCount } from '@/server/types';
 
-export async function getData(): Promise<{ decks: DeckWithCardCount[] }> {
+async function getData(): Promise<{ decks: DeckWithCardCount[] }> {
   const data = await rpc.decks.getAllWithCardCounts();
   return {
     decks: data.rows,
@@ -16,7 +16,7 @@ export async function getData(): Promise<{ decks: DeckWithCardCount[] }> {
 export async function DecksTable() {
   const { decks } = await getData();
   if (!decks) {
-    return <>No data</>;
+    return null;
   }
 
   return (
