@@ -3,13 +3,14 @@ import { Suspense } from 'react';
 import { CardsTable, CardsTablePlaceholder } from '.';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
+import { MainWrapper } from '@/components/main-wrapper';
 
 /**
  * The All Cards overview
  */
 export default async function Cards() {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
+    <MainWrapper>
       <MainHeading>Cards</MainHeading>
       <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
@@ -18,6 +19,6 @@ export default async function Cards() {
 
       <SubFooter />
       <VercelFooter />
-    </main>
+    </MainWrapper>
   );
 }
