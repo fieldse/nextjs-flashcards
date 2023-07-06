@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { CardsTable, CardsTablePlaceholder } from './cards';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
+import { MainWrapper } from '@/components/main-wrapper';
 
 /**
  * The main page of the app
@@ -11,7 +12,7 @@ export default function MainPage() {
   // const currentPage: 'home' | 'cards' | 'decks' | 'users' = 'home';
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
+    <MainWrapper>
       <MainHeading>Flashcards app</MainHeading>
       <Suspense fallback={<CardsTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
@@ -20,6 +21,6 @@ export default function MainPage() {
 
       <SubFooter />
       <VercelFooter />
-    </main>
+    </MainWrapper>
   );
 }

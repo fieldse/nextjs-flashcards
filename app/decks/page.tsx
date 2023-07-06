@@ -3,13 +3,14 @@ import { Suspense } from 'react';
 import { DecksTable } from '.';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
+import { MainWrapper } from '@/components/main-wrapper';
 
 /**
  * The Decks overview page
  */
 export default async function Decks() {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
+    <MainWrapper>
       <MainHeading>Decks</MainHeading>
       <Suspense
         fallback={<div className="text-gray-500 p-12 my-6 text-center">Loading data...</div>}
@@ -20,6 +21,6 @@ export default async function Decks() {
 
       <SubFooter />
       <VercelFooter />
-    </main>
+    </MainWrapper>
   );
 }

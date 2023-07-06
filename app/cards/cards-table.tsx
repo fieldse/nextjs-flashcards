@@ -4,7 +4,7 @@ import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
 
 async function getData(): Promise<{ cards: Card[] }> {
-  const data = await rpc.cards.getAll({ limit: 20 });
+  const data = await rpc.cards.getAll({ limit: 15 });
   return {
     cards: data.rows,
   };

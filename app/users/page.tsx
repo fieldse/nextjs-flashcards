@@ -4,13 +4,14 @@ import { Suspense } from 'react';
 import { UsersTable, UsersTablePlaceholder } from './users-table';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
+import { MainWrapper } from '@/components/main-wrapper';
 
 /**
  * The Users overview
  */
 export default async function Users() {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
+    <MainWrapper>
       <MainHeading>Users</MainHeading>
       <Suspense fallback={<UsersTablePlaceholder />}>
         {/* @ts-expect-error Async Server Component */}
@@ -19,6 +20,6 @@ export default async function Users() {
 
       <SubFooter />
       <VercelFooter />
-    </main>
+    </MainWrapper>
   );
 }
