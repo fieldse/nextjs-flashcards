@@ -34,6 +34,7 @@ yarn-error.log*
 # IDE
 .vscode
 *.code-workspace
+.vscode/settings.json
 
 # vercel
 .vercel
