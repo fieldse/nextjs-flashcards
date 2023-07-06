@@ -1,21 +1,12 @@
+// Components for displaying cards as a table
 import { timeAgo } from '@/lib/utils';
-import * as rpc from '../../rpc';
 import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
-
-async function getData(): Promise<{ cards: Card[] }> {
-  const data = await rpc.cards.getAll({ limit: 15 });
-  return {
-    cards: data.rows,
-  };
-}
 
 /**
  * Vertical table view of all cards
  */
-export async function CardsTable() {
-  const { cards } = await getData();
-
+export function CardsTable({ cards }: { cards: Card[] }) {
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
