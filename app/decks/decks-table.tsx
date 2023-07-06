@@ -2,19 +2,23 @@ import { stripKebabCase, timeAgo } from '@/lib/utils';
 import { RefreshButton } from '@/components/buttons';
 import * as rpc from '../../rpc';
 import { HiOutlineBookOpen } from 'react-icons/hi';
+import { DeckWithCardCount } from '@/server/types';
+
+export async function getData(): Promise<{ decks: DeckWithCardCount[] }> {
+  const data = await rpc.decks.getAllWithCardCounts();
+  return {
+    decks: data.rows,
+  };
+}
 
 /**
  * Table view of all decks
  */
 export async function DecksTable() {
-  let data;
-
-  try {
-    data = await rpc.decks.getAllWithCardCounts();
-  } catch (e) {
-    throw new Error(`get decks failed:` + e);
+  const { decks } = await getData();
+  if (!decks) {
+    return <>No data</>;
   }
-  const { rows: decks } = data;
 
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">

@@ -16,7 +16,7 @@ export async function getAllWithCardCounts() {
   return await sql<DeckWithCardCount>`
     SELECT 
       d.*,
-      COUNT(cd.*) "card_count"
+      COUNT(cd.*) "cardCount"
     FROM decks d
     LEFT JOIN cards_decks cd ON cd.deck_id = d.id
     GROUP BY d.id
