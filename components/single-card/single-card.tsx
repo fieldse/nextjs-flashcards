@@ -55,9 +55,6 @@ export default function SingleCard({
             <HiOutlineSpeakerWave className="ml-4 w-6 h-6" />
           </span>
 
-          {/* "Show definition" button */}
-          {!showDefinition && <NextButtonArrow action={() => setShowDefinition(true)} />}
-
           {/* Definition */}
           <span className={`${showDefinition ? 'hidden' : ''} flex flex-col justify-center`}>
             <span className="">
@@ -69,6 +66,17 @@ export default function SingleCard({
           {/* Next card nav button */}
           {!!nextCardId && <NextButtonDoubleArrow action={navigateCardAction(nextCardId)} />}
         </span>
+
+        {/* "Show definition" button */}
+        {!showDefinition && (
+          <button
+            type="button"
+            className="px-6 py-2 bg-gray-400 text-white text-lg grow-0 shrink rounded-md drop-shadow-md shadow-gray-400"
+            onClick={() => setShowDefinition(true)}
+          >
+            Show
+          </button>
+        )}
 
         {/* Self-scoring buttons */}
         {showDefinition && showScoreButtons && nextCardId && (
