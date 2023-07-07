@@ -18,6 +18,7 @@ type Props = {
   nextCardId?: number | null;
   prevCardId?: number | null;
   showScoreButtons?: boolean;
+  showNavigation?: boolean;
 };
 
 /**
@@ -28,6 +29,7 @@ export default function SingleCard({
   nextCardId,
   prevCardId,
   showScoreButtons = true,
+  showNavigation = true,
 }: Props) {
   const [showDefinition, setShowDefinition] = useState(false);
   const router = useRouter();
@@ -37,7 +39,10 @@ export default function SingleCard({
 
   // Go to previous or next card
   const navigateCardAction = (cardId: number) => {
-    return () => router.replace(`/card/${cardId}`);
+    return () => {
+      setShowDefinition(false);
+      router.replace(`/card/${cardId}`);
+    };
   };
 
   return (
@@ -45,18 +50,20 @@ export default function SingleCard({
       <div className="flex flex-col justify-between">
         <span className="flex flex-row justify-between">
           {/* Previous card nav button */}
-          {!!prevCardId && <PrevButtonDoubleArrow action={navigateCardAction(prevCardId)} />}
+          {!!prevCardId && showNavigation && (
+            <PrevButtonDoubleArrow action={navigateCardAction(prevCardId)} />
+          )}
 
           {/* Title headword */}
           <span className="flex items-center">
             <Heading2 className=" md:text-6xl grow-0">{card.headword || 'no headword'}</Heading2>
 
             {/* Pronunciation --placeholder  */}
-            <HiOutlineSpeakerWave className="ml-4 w-6 h-6" />
+            {showDefinition && <HiOutlineSpeakerWave className="ml-4 w-6 h-6" />}
           </span>
 
           {/* Definition */}
-          <span className={`${showDefinition ? 'hidden' : ''} flex flex-col justify-center`}>
+          <span className={`${!showDefinition ? 'hidden' : ''} flex flex-col justify-center`}>
             <span className="">
               <span className="text-2xl">{card.definition || 'no definition'}</span>
               <span className="ml-2 text-xl">{partOfSpeech}</span>
@@ -64,14 +71,16 @@ export default function SingleCard({
           </span>
 
           {/* Next card nav button */}
-          {!!nextCardId && <NextButtonDoubleArrow action={navigateCardAction(nextCardId)} />}
+          {!!nextCardId && showNavigation && (
+            <NextButtonDoubleArrow action={navigateCardAction(nextCardId)} />
+          )}
         </span>
 
         {/* "Show definition" button */}
         {!showDefinition && (
           <button
             type="button"
-            className="px-6 py-2 bg-gray-400 text-white text-lg grow-0 shrink rounded-md drop-shadow-md shadow-gray-400"
+            className="mt-12 px-6 py-2 bg-gray-400 text-white text-lg grow-0 shrink rounded-md drop-shadow-md shadow-gray-400"
             onClick={() => setShowDefinition(true)}
           >
             Show
