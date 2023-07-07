@@ -12,8 +12,9 @@ export async function getAll(opts: { limit?: number } = {}) {
 /**
  * Get a single card by id
  */
-export async function get(id: string) {
-  return await sql<Card>`SELECT * FROM cards WHERE id = ${id}`;
+export async function get(id: number | string) {
+  const { rows } = await sql<Card>`SELECT * FROM cards WHERE id = ${id}`;
+  return rows[0];
 }
 
 /**

@@ -1,21 +1,13 @@
+// Components for displaying cards as a table
 import { timeAgo } from '@/lib/utils';
-import * as rpc from '../../rpc';
 import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
-
-async function getData(): Promise<{ cards: Card[] }> {
-  const data = await rpc.cards.getAll({ limit: 15 });
-  return {
-    cards: data.rows,
-  };
-}
+import Link from 'next/link';
 
 /**
  * Vertical table view of all cards
  */
-export async function CardsTable() {
-  const { cards } = await getData();
-
+export function CardsTable({ cards }: { cards: Card[] }) {
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
@@ -27,21 +19,23 @@ export async function CardsTable() {
       <div className="divide-y divide-gray-900/5">
         {cards.length ? (
           cards.map((card) => (
-            <div key={card.headword} className="flex items-center justify-between py-3">
-              <div className="flex items-center space-x-4">
-                <span>
-                  <HiOutlineDocument
-                    className="inline-block mr-1 w-12 h-12 text-blue-500"
-                    aria-valuetext={`${card.headword}-icon`}
-                  />
-                </span>
-                <div className="space-y-1">
-                  <p className="font-medium leading-none">{card.headword}</p>
-                  <p className="text-sm text-gray-500">{card.definition}</p>
+            <Link key={card.headword} href={`/card/${card.id}`}>
+              <div className="flex items-center justify-between py-3">
+                <div className="flex items-center space-x-4">
+                  <span>
+                    <HiOutlineDocument
+                      className="inline-block mr-1 w-12 h-12 text-blue-500"
+                      aria-valuetext={`${card.headword}-icon`}
+                    />
+                  </span>
+                  <div className="space-y-1">
+                    <p className="font-medium leading-none">{card.headword}</p>
+                    <p className="text-sm text-gray-500">{card.definition}</p>
+                  </div>
                 </div>
+                <p className="text-sm text-gray-500">{timeAgo(card.createdAt)}</p>
               </div>
-              <p className="text-sm text-gray-500">{timeAgo(card.createdAt)}</p>
-            </div>
+            </Link>
           ))
         ) : (
           <div>Cards data empty</div>
