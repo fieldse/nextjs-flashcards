@@ -52,11 +52,11 @@ export default function SingleCard({
             <Heading2 className=" md:text-6xl grow-0">{card.headword || 'no headword'}</Heading2>
 
             {/* Pronunciation --placeholder  */}
-            {!showDefinition && <HiOutlineSpeakerWave className="ml-4 w-6 h-6" />}
+            <HiOutlineSpeakerWave className="ml-4 w-6 h-6" />
           </span>
 
           {/* "Show definition" button */}
-          {showDefinition && <NextButtonArrow action={() => setShowDefinition(true)} />}
+          {!showDefinition && <NextButtonArrow action={() => setShowDefinition(true)} />}
 
           {/* Definition */}
           <span className={`${showDefinition ? 'hidden' : ''} flex flex-col justify-center`}>
