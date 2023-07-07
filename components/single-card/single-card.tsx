@@ -5,11 +5,7 @@ import { Card } from '@/server/types';
 import { useEffect, useState } from 'react';
 import { HiOutlineSpeakerWave } from 'react-icons/hi2';
 import { ScoringButtons } from '../buttons';
-import {
-  NextButtonArrow,
-  NextButtonDoubleArrow,
-  PrevButtonDoubleArrow,
-} from '../buttons/navigation-buttons';
+import { NextButtonArrow, PrevButtonArrow } from '../buttons/navigation-buttons';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -39,11 +35,13 @@ export default function SingleCard({
 
   // Go to previous or next card
   const navigateCardAction = (cardId: number) => {
-    return () => {
-      setShowDefinition(false);
-      router.replace(`/card/${cardId}`);
-    };
+    return () => router.replace(`/card/${cardId}`);
   };
+
+  // Reset hide definition on route change
+  useEffect(() => {
+    setShowDefinition(false);
+  }, [card.id]);
 
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
@@ -51,7 +49,7 @@ export default function SingleCard({
         <span className="flex flex-row justify-between">
           {/* Previous card nav button */}
           {!!prevCardId && showNavigation && (
-            <PrevButtonDoubleArrow action={navigateCardAction(prevCardId)} />
+            <PrevButtonArrow action={navigateCardAction(prevCardId)} />
           )}
 
           {/* Title headword */}
@@ -72,7 +70,7 @@ export default function SingleCard({
 
           {/* Next card nav button */}
           {!!nextCardId && showNavigation && (
-            <NextButtonDoubleArrow action={navigateCardAction(nextCardId)} />
+            <NextButtonArrow action={navigateCardAction(nextCardId)} />
           )}
         </span>
 
