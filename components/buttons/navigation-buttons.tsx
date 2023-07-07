@@ -18,15 +18,36 @@ type NavigationButtonProps = {
 };
 
 /**
+ * "Next" button with single arrow icon
+ */
+export function NextButtonArrow(props: NavigationButtonProps) {
+  return <BasicButton {...props} icon={HiOutlineArrowRight} iconSide="right" />;
+}
+
+/**
  * "Next" button with double chevron icon
- * TODO: add support for href attribute
  */
 export function NextButtonDoubleArrow(props: NavigationButtonProps) {
   return <BasicButton {...props} icon={HiChevronDoubleRight} iconSide="right" />;
 }
 
 /**
+ * "Prev" button with single arrow icon
+ */
+export function PrevButtonArrow(props: NavigationButtonProps) {
+  return <BasicButton {...props} icon={HiOutlineArrowLeft} iconSide="right" />;
+}
+
+/**
+ * "Prev" button with double chevron icon
+ */
+export function PrevButtonDoubleArrow(props: NavigationButtonProps) {
+  return <BasicButton {...props} icon={HiChevronDoubleLeft} iconSide="left" />;
+}
+
+/**
  * Basic navigation button, accepts icon param and which side it should be on
+ * TODO: add support for href attribute
  */
 function BasicButton(
   props: NavigationButtonProps & { icon: IconType; iconSide?: 'right' | 'left' },

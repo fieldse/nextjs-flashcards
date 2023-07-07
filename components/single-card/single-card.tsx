@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { HiOutlineChevronDoubleRight } from 'react-icons/hi';
 import { HiOutlineSpeakerWave } from 'react-icons/hi2';
 import { ScoringButtons } from '../buttons';
-import { NextButtonDoubleArrow } from '../buttons/navigation-buttons';
+import { NextButtonArrow, NextButtonDoubleArrow } from '../buttons/navigation-buttons';
 
 export default function SingleCard({ card }: { card: Card }) {
   const [hidden, setHidden] = useState(true);
@@ -29,7 +29,7 @@ export default function SingleCard({ card }: { card: Card }) {
           </span>
 
           {/* Next button */}
-          {hidden && <NextButtonDoubleArrow action={() => setHidden(!hidden)} />}
+          {hidden && <NextButtonArrow action={() => setHidden(!hidden)} />}
 
           {/* Definition */}
           <span className={`${hidden ? 'hidden' : ''} flex flex-col justify-center`}>
