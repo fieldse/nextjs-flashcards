@@ -7,7 +7,10 @@ const inter = Inter({
   display: 'swap',
 });
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+/**
+ * Basic layout with navigation bar, and no footers
+ */
+export default function NoFootersLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
@@ -17,3 +20,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
+export const getLayout = (page: any) => <NoFootersLayout>{page}</NoFootersLayout>;
+
+NoFootersLayout.getLayout = getLayout;

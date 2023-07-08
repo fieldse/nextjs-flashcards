@@ -8,9 +8,6 @@ import URLS from '@/lib/urls';
  * The main page of the app
  */
 export default function MainPage() {
-  // placeholder for routing
-  // const currentPage: 'home' | 'cards' | 'decks' | 'users' = 'home';
-
   return (
     <MainWrapper>
       <MainHeading>Flashcards app</MainHeading>

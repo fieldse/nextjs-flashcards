@@ -1,11 +1,7 @@
 import { Navigation } from '@/components/nav-menu';
-import '@/styles/globals.css';
-import { Inter } from 'next/font/google';
+import { SubFooter, VercelFooter } from '@/components/footer';
 
-export const metadata = {
-  title: 'Flashcards app',
-  description: 'A simple Next.js app for flashcards language study',
-};
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -13,12 +9,17 @@ const inter = Inter({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+/**
+ * The base app layout with navigation bar and footers
+ */
+export default function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
         <Navigation />
         {children}
+        <SubFooter />
+        <VercelFooter />
       </body>
     </html>
   );

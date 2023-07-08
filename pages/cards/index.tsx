@@ -1,11 +1,9 @@
 import { CardsTable } from '@/components/cards-table';
 import { SubFooter, VercelFooter } from '@/components/footer';
 import { MainHeading } from '@/components/headers';
-import { MainWrapper } from '@/components/main-wrapper';
-import { logDebug } from '@/lib/utils';
 import * as rpc from '@/rpc';
 import { Card } from '@/server/types';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 
 /**
  * Get a slice of 15 cards, ordered by id
@@ -26,7 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
  */
 export default function CardsPage({ cards }: { cards: Card[] }) {
   return (
-    <div id="content" className="w-full mt-16">
+    <div className="w-full mt-16">
       <MainHeading>Cards</MainHeading>
       <CardsTable cards={cards} />;
     </div>
