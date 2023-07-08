@@ -1,22 +1,26 @@
 'use server';
-import { Suspense } from 'react';
-import { CardsTable, CardsTablePlaceholder } from '@/components/cards-table';
-import { SubFooter, VercelFooter } from '@/components/footer';
+import { CardsTable } from '@/components/cards-table';
 import { MainHeading } from '@/components/headers';
-import { MainWrapper } from '@/components/main-wrapper';
 import * as rpc from '@/rpc';
 import { Card } from '@/server/types';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import URLS from '@/lib/urls';
+import { GetStaticProps } from 'next';
+import { logDebug } from '@/lib/utils';
 
 /**
  * Get a slice of 15 cards, ordered by id
  */
 async function getData(): Promise<{ cards: Card[] }> {
-  const data = await rpc.cards.getAll({ limit: 15 });
-  return {
-    cards: JSON.parse(JSON.stringify(data.rows)),
-  };
+  logDebug('(cardsIndex -- getData)');
+  try {
+    const data = await rpc.cards.getAll({ limit: 15 });
+    logDebug('(cardsIndex -- getData) data: ', JSON.stringify(data, null, 2));
+    return {
+      cards: data.rows,
+    };
+  } catch (err) {
+    logDebug('(cardsIndex -- getData) error:', JSON.stringify(err));
+    throw err;
+  }
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -24,22 +28,15 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { ...data } };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [URLS.cards.index()],
-    fallback: false,
-  };
-};
 /**
  * The All Cards overview
  */
-export default async function CardsPage({ cards }: { cards: Card[] }) {
+export default async function CardsPage(props: { cards: Card[] }) {
+  logDebug('(cardsPage) props: ', props);
   return (
-    <MainWrapper>
+    <div id="content">
       <MainHeading>Cards</MainHeading>
-      <CardsTable cards={cards} />;
-      <SubFooter />
-      <VercelFooter />
-    </MainWrapper>
+      {/* <CardsTable cards={cards} />; */}
+    </div>
   );
 }
