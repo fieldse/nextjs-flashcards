@@ -20,7 +20,11 @@ export default function MainPage() {
           Try browsing some{' '}
           <Link href="/decks" className="text-blue-500">
             decks
-          </Link>
+          </Link>{' '}
+          or{' '}
+          <Link href="/cards" className="text-blue-500">
+            all cards
+          </Link>{' '}
         </p>
       </div>
 

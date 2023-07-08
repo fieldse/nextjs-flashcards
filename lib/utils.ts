@@ -1,5 +1,12 @@
 import ms from 'ms';
 
+/**
+ * debug logging, delete me
+ */
+export const logDebug = (msg: string, ...args: any) => {
+  console.log(`=== debug: ${msg}`, ...args);
+};
+
 export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
   if (!timestamp) return 'never';
   return `${ms(Date.now() - new Date(timestamp).getTime())}${timeOnly ? '' : ' ago'}`;
