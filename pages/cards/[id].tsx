@@ -3,6 +3,7 @@ import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
 import { logDebug } from '@/lib/utils';
+import * as urls from '@/lib/urls';
 
 type SingleCardProps = {
   card: Card;
@@ -15,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allCardIds = await rpc.cards.getAllIDs();
   logDebug(`(getStaticPaths) generating static paths for card ids:`, allCardIds);
   return {
-    paths: allCardIds.map((id) => `/card/${id}`),
+    paths: allCardIds.map((id) => urls.cardItem(id)),
     fallback: false,
   };
 };

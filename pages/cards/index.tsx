@@ -6,39 +6,33 @@ import { MainHeading } from '@/components/headers';
 import { MainWrapper } from '@/components/main-wrapper';
 import * as rpc from '@/rpc';
 import { Card } from '@/server/types';
+import { GetStaticProps } from 'next';
 
+/**
+ * Get a slice of 15 cards, ordered by id
+ */
 async function getData(): Promise<{ cards: Card[] }> {
   const data = await rpc.cards.getAll({ limit: 15 });
   return {
-    cards: data.rows,
+    cards: JSON.parse(JSON.stringify(data.rows)),
   };
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await getData();
+  return { props: { ...data } };
+};
 
 /**
  * The All Cards overview
  */
-export default async function CardsPage() {
+export default async function CardsPage({ cards }: { cards: Card[] }) {
   return (
     <MainWrapper>
       <MainHeading>Cards</MainHeading>
-      <Suspense fallback={<CardsTablePlaceholder />}>
-        {/* @ts-expect-error Async Server Component */}
-        <AllCards />
-      </Suspense>
-
+      <CardsTable cards={cards} />;
       <SubFooter />
       <VercelFooter />
     </MainWrapper>
   );
-}
-
-/**
- * Wrapps Cards with a data fetch
- */
-async function AllCards() {
-  const data = await getData();
-  if (!data) {
-    return null;
-  }
-  return <CardsTable cards={data.cards} />;
 }
