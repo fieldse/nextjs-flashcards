@@ -11,6 +11,14 @@ export async function getAll(opts: { limit?: number } = {}) {
   `;
 }
 
+/*
+ * Get all deck IDs, for prebuilding routes
+ */
+export async function getAllIDs() {
+  const data = await sql<{ id: number }>`SELECT id FROM decks`;
+  return data.rows.map((x) => x.id);
+}
+
 /**
  * Get all decks with card counts
  */
@@ -30,16 +38,21 @@ export async function getAllWithCardCounts(opts: { limit?: number } = {}) {
  * Get a single deck by id
  */
 export async function get(id: number) {
-  const { rows } = await sql<Deck>`SELECT * FROM decks WHERE id = ${id}`;
+  const { rows } = await sql.query<Deck>(`SELECT * FROM decks WHERE id = $1`, [id]);
   return rows[0];
 }
 
 /**
  * Get deck details and all cards for given deck
  */
-export async function getDeckCards(id: number) {
-  const deck = await get(id);
-  const { rows: cards } = await sql.query<Card>(`SELECT * FROM cards WHERE deck_id = ?`, [id]);
+export async function getDeckCards(deckId: number) {
+  const deck = await get(deckId);
+  const q = `
+    SELECT c.* 
+    FROM cards_decks cd
+    LEFT JOIN cards c ON c.id = cd.card_id
+    WHERE cd.deck_id = $1`;
+  const { rows: cards } = await sql.query<Card>(q, [deckId]);
   return {
     deck,
     cards,
