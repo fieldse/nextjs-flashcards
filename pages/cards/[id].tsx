@@ -3,6 +3,7 @@ import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
 import { logDebug } from '@/lib/utils';
+import URLS from '@/lib/urls';
 
 type SingleCardProps = {
   card: Card;
@@ -10,16 +11,16 @@ type SingleCardProps = {
   prevCardId: number | null;
 };
 
-// Returns a single card view
 export const getStaticPaths: GetStaticPaths = async () => {
   const allCardIds = await rpc.cards.getAllIDs();
   logDebug(`(getStaticPaths) generating static paths for card ids:`, allCardIds);
   return {
-    paths: allCardIds.map((id) => `/card/${id}`),
+    paths: allCardIds.map((id) => URLS.cards.item(id)),
     fallback: false,
   };
 };
 
+// fetch current card details, and IDs of prev/next cards
 async function getData(id: string): Promise<SingleCardProps> {
   logDebug('(getData) cardId:', id);
   const card = await rpc.cards.get(id); // get the individual card

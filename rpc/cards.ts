@@ -5,12 +5,8 @@ import { sql } from '@vercel/postgres';
 /**
  * Get all cards
  */
-export async function getAll(opts: { limit?: number } = {}) {
-  // FIXME: Don't know how to build conditional query strings
-  if (opts.limit) {
-    return await sql.query<Card>(`SELECT * FROM cards LIMIT ?`, [opts.limit || 50]);
-  }
-  return await sql<Card>`SELECT * FROM cards`;
+export async function getAll({ limit = 50 }: { limit?: number }) {
+  return await sql.query<Card>(`SELECT * FROM cards LIMIT $1`, [limit]);
 }
 
 /**

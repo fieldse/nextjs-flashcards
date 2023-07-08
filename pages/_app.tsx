@@ -3,15 +3,15 @@
 import type { AppProps } from 'next/app';
 import { Navigation } from '@/components/nav-menu';
 import '@/styles/globals.css';
-// import { MainHeading } from '@/components/headers';
 import { MainWrapper } from '@/components/main-wrapper';
+import { VercelFooter } from '@/components/footer';
 
 export default function PagesApp({ Component, pageProps }: AppProps) {
   return (
     <MainWrapper>
       <Navigation />
-      {/* <MainHeading>Cards</MainHeading> */}
       <Component {...pageProps} />
+      <VercelFooter />
     </MainWrapper>
   );
 }

@@ -3,6 +3,7 @@ import { timeAgo } from '@/lib/utils';
 import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
 import Link from 'next/link';
+import URLS from '@/lib/urls';
 
 /**
  * Vertical table view of all cards
@@ -19,7 +20,7 @@ export function CardsTable({ cards }: { cards: Card[] }) {
       <div className="divide-y divide-gray-900/5">
         {cards.length ? (
           cards.map((card) => (
-            <Link key={card.headword} href={`/card/${card.id}`}>
+            <Link key={card.headword} href={URLS.cards.item(card.id)}>
               <div className="flex items-center justify-between py-3">
                 <div className="flex items-center space-x-4">
                   <span>

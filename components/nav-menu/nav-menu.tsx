@@ -14,7 +14,7 @@ export function Navigation({ className }: { className?: string }) {
     <nav
       className={`${
         className || ''
-      } bg-white z-50 w-full absolute top-0 flex justify-start p-4 space-x-4 items-center `}
+      } bg-white z-50 w-full fixed top-0 flex justify-start p-4 space-x-4 items-center `}
     >
       {navLinks.map((link, index) => (
         <NavLink key={`nav-${index}`} {...link} />

@@ -1,4 +1,6 @@
 import { Navigation } from '@/components/nav-menu';
+import { SubFooter, VercelFooter } from '@/components/footer';
+
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
@@ -7,12 +9,17 @@ const inter = Inter({
   display: 'swap',
 });
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+/**
+ * The base app layout with navigation bar and footers
+ */
+export default function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
         <Navigation />
         {children}
+        <SubFooter />
+        <VercelFooter />
       </body>
     </html>
   );
