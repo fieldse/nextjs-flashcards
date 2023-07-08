@@ -35,8 +35,13 @@ export async function get(id: number) {
 }
 
 /**
- * Get all cards for given deck
+ * Get deck details and all cards for given deck
  */
 export async function getDeckCards(id: number) {
-  return await sql<Card>`SELECT * FROM cards WHERE deck_id = ${id}`;
+  const deck = await get(id);
+  const { rows: cards } = await sql.query<Card>(`SELECT * FROM cards WHERE deck_id = ?`, [id]);
+  return {
+    deck,
+    cards,
+  };
 }
