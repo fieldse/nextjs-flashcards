@@ -7,7 +7,7 @@ import { HiOutlineSpeakerWave } from 'react-icons/hi2';
 import { ScoringButtons } from '../buttons';
 import { NextButtonArrow, PrevButtonArrow } from '../buttons/navigation-buttons';
 import { useRouter } from 'next/router';
-import * as urls from '@/lib/urls';
+import URLS from '@/lib/urls';
 
 type Props = {
   card: Card;
@@ -36,7 +36,7 @@ export default function SingleCard({
 
   // Go to previous or next card
   const navigateCardAction = (cardId: number) => {
-    return () => router.replace(urls.cardItem(cardId));
+    return () => router.replace(URLS.cards.item(cardId));
   };
 
   // Reset hide definition on route change

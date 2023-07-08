@@ -3,29 +3,44 @@
 /**
  * Url for all cards view
  */
-export const cardsList = () => `/cards`;
+const cardsIndex = () => `/cards`;
 
 /**
  * Url for a single card view
  */
-export const cardItem = (id: string | number) => `/cards/${id}`;
+const cardItem = (id: string | number) => `/cards/${id}`;
 
 /**
  * Url for all decks view
  */
-export const decksList = () => `/decks`;
+const decksIndex = () => `/decks`;
 
 /**
  * Url for a single deck view
  */
-export const deckItem = (id: string | number) => `/decks/${id}`;
+const deckItem = (id: string | number) => `/decks/${id}`;
 
 /**
  * Url for all users view
  */
-export const usersList = () => `/users`;
+const usersIndex = () => `/users`;
 
 /**
  * Url for a single user view
  */
-export const userItem = (id: string | number) => `/users/${id}`;
+const userItem = (id: string | number) => `/users/${id}`;
+
+export default {
+  cards: {
+    index: cardsIndex,
+    item: cardItem,
+  },
+  decks: {
+    index: decksIndex,
+    item: deckItem,
+  },
+  users: {
+    index: usersIndex,
+    item: userItem,
+  },
+};

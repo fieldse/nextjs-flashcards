@@ -3,14 +3,14 @@
 import { HiOutlineFaceFrown, HiOutlineFaceSmile } from 'react-icons/hi2';
 import { ButtonSolid } from './button';
 import { HiOutlineThumbUp } from 'react-icons/hi';
-import * as urls from '@/lib/urls';
+import URLS from '@/lib/urls';
 
 /**
  * Set of three buttons for self-scoring on a review session
  *  Easy / Okay / Hard
  */
 export function ScoringButtons({ nextCardId }: { nextCardId: number }) {
-  const nextCardUrl = urls.cardItem(nextCardId);
+  const nextCardUrl = URLS.cards.item(nextCardId);
   return (
     <div className="flex relative top-6 justify-around w-full my-8">
       <a href={nextCardUrl}>
