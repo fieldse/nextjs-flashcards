@@ -1,6 +1,6 @@
 // Buttons for self-scoring on a review session
 
-import { HiFaceFrown, HiOutlineFaceFrown, HiOutlineFaceSmile } from 'react-icons/hi2';
+import { HiOutlineFaceFrown, HiOutlineFaceSmile } from 'react-icons/hi2';
 import { ButtonSolid } from './button';
 import { HiOutlineThumbUp } from 'react-icons/hi';
 

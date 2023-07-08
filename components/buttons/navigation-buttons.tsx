@@ -1,7 +1,6 @@
 // Next/back navigation arrow buttons
 
 import {
-  HiOutlineChevronDoubleRight,
   HiChevronDoubleLeft,
   HiOutlineArrowRight,
   HiOutlineArrowLeft,
