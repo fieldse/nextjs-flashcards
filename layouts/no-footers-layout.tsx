@@ -20,7 +20,3 @@ export default function NoFootersLayout({ children }: { children: React.ReactNod
     </html>
   );
 }
-
-export const getLayout = (page: any) => <NoFootersLayout>{page}</NoFootersLayout>;
-
-NoFootersLayout.getLayout = getLayout;
