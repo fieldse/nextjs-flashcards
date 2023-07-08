@@ -6,7 +6,8 @@ import { MainHeading } from '@/components/headers';
 import { MainWrapper } from '@/components/main-wrapper';
 import * as rpc from '@/rpc';
 import { Card } from '@/server/types';
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import * as urls from '@/lib/urls';
 
 /**
  * Get a slice of 15 cards, ordered by id
@@ -23,6 +24,12 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { ...data } };
 };
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [urls.cardsList()],
+    fallback: false,
+  };
+};
 /**
  * The All Cards overview
  */
