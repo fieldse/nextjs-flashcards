@@ -31,7 +31,7 @@ export async function DecksTable() {
       </div>
       <div className="divide-y divide-gray-900/5">
         {decks.map((deck) => (
-          <div key={deck.title} className="flex items-start justify-between py-3">
+          <div key={`deck-${deck.id}`} className="flex items-start justify-between py-3">
             <Link href={URLS.decks.item(deck.id)}>
               <div className="flex items-center justify-between space-x-4 w-full">
                 {/* Deck title and icon */}

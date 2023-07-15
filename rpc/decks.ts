@@ -51,7 +51,8 @@ export async function getDeckCards(deckId: number) {
     SELECT c.* 
     FROM cards_decks cd
     LEFT JOIN cards c ON c.id = cd.card_id
-    WHERE cd.deck_id = $1`;
+    WHERE cd.deck_id = $1
+    ORDER BY c.id`;
   const { rows: cards } = await sql.query<Card>(q, [deckId]);
   return {
     deck,
