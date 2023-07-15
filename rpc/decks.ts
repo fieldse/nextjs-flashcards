@@ -76,7 +76,7 @@ export async function getDeckCardIds(deckId: number) {
  * Get all deck+cardId combinations // fixme: should remove this
  */
 export async function getAllDeckCardIds() {
-  return await sql`
+  return await sql<{ deckId: number; cardId: number }>`
     SELECT deck_id "deckId", card_id "cardId" FROM cards_decks cd
     ORDER BY deck_id, card_id`;
 }
