@@ -19,18 +19,6 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
   }
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  logDebug(`=== (getStaticPaths)`);
-  const data = await rpc.decks.getAllDeckCardIds();
-  logDebug(`=== (getStaticPaths) data:`, data.rows);
-  const paths = data.rows.map(({ cardId, deckId }) => URLS.decks.deckCard(deckId, cardId));
-  logDebug(`=== (getStaticPaths) paths:`, paths);
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
 type Props = {
   card: Card;
 };

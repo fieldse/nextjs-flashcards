@@ -4,6 +4,7 @@ import * as rpc from '@/rpc';
 import { Card, Deck } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import URLS from '@/lib/urls';
+import { logDebug } from '@/lib/utils';
 
 /**
  * Get deck details and cards
@@ -26,8 +27,15 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allDeckIds = await rpc.decks.getAllIDs();
+  const deckPaths = allDeckIds.map((id) => URLS.decks.item(id));
+
+  const cardIds = await rpc.decks.getAllDeckCardIds();
+  const cardPaths = cardIds.rows.map(({ cardId, deckId }) => URLS.decks.deckCard(deckId, cardId));
+  logDebug(`=== (getStaticPaths) data:`, cardIds.rows);
+  logDebug(`=== (getStaticPaths) cardPaths:`, cardPaths);
+
   return {
-    paths: allDeckIds.map((id) => URLS.decks.item(id)),
+    paths: [...deckPaths, ...cardPaths],
     fallback: false,
   };
 };

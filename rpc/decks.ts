@@ -77,6 +77,6 @@ export async function getDeckCardIds(deckId: number) {
  */
 export async function getAllDeckCardIds() {
   return await sql`
-    SELECT deck_id, card_id FROM cards_decks cd
+    SELECT deck_id "deckId", card_id "cardId" FROM cards_decks cd
     ORDER BY deck_id, card_id`;
 }
