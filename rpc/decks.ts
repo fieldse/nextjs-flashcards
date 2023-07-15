@@ -65,11 +65,11 @@ export async function getDeckCards(deckId: number) {
  */
 export async function getDeckCardIds(deckId: number) {
   const q = `
-    SELECT card_id FROM cards_decks cd
+    SELECT card_id "cardId" FROM cards_decks cd
     WHERE cd.deck_id = $1
     ORDER BY card_id`;
-  const { rows } = await sql.query<{ id: number }>(q, [deckId]);
-  return rows.map((x) => x.id);
+  const { rows } = await sql.query<{ cardId: number }>(q, [deckId]);
+  return rows.map((x) => x.cardId);
 }
 
 /**

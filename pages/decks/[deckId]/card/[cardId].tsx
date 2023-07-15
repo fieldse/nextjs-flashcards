@@ -2,13 +2,25 @@ import * as rpc from '@/rpc';
 import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SingleCard from '@/components/single-card/single-card';
+import urls from '@/lib/urls';
 
 export const getStaticProps: GetStaticProps = async (ctx: any) => {
-  const { cardId } = ctx.params;
+  const { deckId, cardId } = ctx.params;
   try {
-    const data = await await rpc.cards.get(cardId);
-    const parsed = JSON.parse(JSON.stringify(data));
-    return { props: { card: parsed } };
+    const cardIds = await rpc.decks.getDeckCardIds(deckId);
+    const card = await rpc.cards.get(cardId);
+
+    // Prev/next cards, if existing
+    const cardIdx = cardIds.indexOf(cardId);
+    const nextCardId = cardIds[cardIdx + 1] || null;
+    const prevCardId = cardIds[cardIdx - 1] || null;
+
+    const data = {
+      card: JSON.parse(JSON.stringify(card)),
+      nextCardId,
+      prevCardId,
+    };
+    return { props: data };
   } catch (err) {
     console.log(`getStaticProps: error: ${err}`);
     return { props: { hasError: true } };
@@ -17,7 +29,7 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const cardIds = await rpc.decks.getAllDeckCardIds();
-  const cardPaths = cardIds.rows.map((r) => `/decks/${r.deckId}/card/${r.cardId}`);
+  const cardPaths = cardIds.rows.map((r) => urls.decks.deckCard(r.deckId, r.cardId));
 
   return {
     paths: [...cardPaths],
@@ -27,11 +39,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 type Props = {
   card: Card;
+  nextCardId: number;
+  prevCardId: number;
 };
 
 /**
  * View for single card within deck browse view
  */
-export default function DeckCard({ card }: Props) {
-  return <SingleCard card={card} />;
+export default function DeckCard({ card, nextCardId, prevCardId }: Props) {
+  return <SingleCard card={card} nextCardId={nextCardId} prevCardId={prevCardId} />;
 }
