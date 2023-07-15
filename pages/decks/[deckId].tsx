@@ -8,9 +8,9 @@ import URLS from '@/lib/urls';
 /**
  * Get deck details and cards
  */
-async function getDeckData(id: number) {
+async function getDeckData(deckId: number) {
   try {
-    const data = await rpc.decks.getDeckCards(id);
+    const data = await rpc.decks.getDeckCards(deckId);
     const parsed = JSON.parse(JSON.stringify(data));
     return { props: { ...parsed } };
   } catch (err) {
@@ -19,8 +19,8 @@ async function getDeckData(id: number) {
 }
 
 export const getStaticProps: GetStaticProps = async (ctx: any) => {
-  const { id } = ctx.params;
-  const data = await getDeckData(id);
+  const { deckId } = ctx.params;
+  const data = await getDeckData(deckId);
   return { ...data };
 };
 
