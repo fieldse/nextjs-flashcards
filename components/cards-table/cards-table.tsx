@@ -4,6 +4,8 @@ import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
 import Link from 'next/link';
 import URLS from '@/lib/urls';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 type Props = {
   title?: string;
@@ -13,6 +15,8 @@ type Props = {
  * Vertical table view of all cards
  */
 export function CardsTable({ title, cards }: Props) {
+  const router = useRouter();
+  const { deckId } = router.query; // if we have a deckId, we're in deck browse view
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
@@ -23,30 +27,38 @@ export function CardsTable({ title, cards }: Props) {
       </div>
       <div className="divide-y divide-gray-900/5">
         {cards.length ? (
-          cards.map((card) => (
-            <Link key={`card-${card.id}`} href={URLS.cards.item(card.id)}>
-              <div className="flex items-center justify-between py-3">
-                <div className="flex items-center space-x-4">
-                  <span>
-                    <HiOutlineDocument
-                      className="inline-block mr-1 w-12 h-12 text-blue-500"
-                      aria-valuetext={`${card.headword}-icon`}
-                    />
-                  </span>
-                  <div className="space-y-1">
-                    <p className="font-medium leading-none">{card.headword}</p>
-                    <p className="text-sm text-gray-500">{card.definition}</p>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-500">{timeAgo(card.createdAt)}</p>
-              </div>
-            </Link>
-          ))
+          cards.map((card) => <CardRow card={card} deckId={deckId as string} />)
         ) : (
           <div>Cards data empty</div>
         )}
       </div>
     </div>
+  );
+}
+
+/**
+ * Single card row in card table
+ */
+export function CardRow({ card, deckId }: { card: Card; deckId?: string }) {
+  const url = deckId ? URLS.decks.deckCard(deckId, card.id) : URLS.cards.item(card.id);
+  return (
+    <Link key={`card-${card.id}`} href={url}>
+      <div className="flex items-center justify-between py-3">
+        <div className="flex items-center space-x-4">
+          <span>
+            <HiOutlineDocument
+              className="inline-block mr-1 w-12 h-12 text-blue-500"
+              aria-valuetext={`${card.headword}-icon`}
+            />
+          </span>
+          <div className="space-y-1">
+            <p className="font-medium leading-none">{card.headword}</p>
+            <p className="text-sm text-gray-500">{card.definition}</p>
+          </div>
+        </div>
+        <p className="text-sm text-gray-500">{timeAgo(card.createdAt)}</p>
+      </div>
+    </Link>
   );
 }
 
