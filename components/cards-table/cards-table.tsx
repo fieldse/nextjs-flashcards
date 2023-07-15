@@ -5,15 +5,19 @@ import { Card } from '@/server/types';
 import Link from 'next/link';
 import URLS from '@/lib/urls';
 
+type Props = {
+  title?: string;
+  cards: Card[];
+};
 /**
  * Vertical table view of all cards
  */
-export function CardsTable({ cards }: { cards: Card[] }) {
+export function CardsTable({ title, cards }: Props) {
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
         <div className="space-y-1">
-          <h2 className="text-xl font-semibold">All cards</h2>
+          {title && <h2 className="text-xl font-semibold">{title}</h2>}
           <p className="text-sm text-gray-500">total cards: {cards.length}</p>
         </div>
       </div>
