@@ -24,7 +24,7 @@ exports.up = async (sql) => {
       CONSTRAINT fk_card_id FOREIGN KEY(card_id) REFERENCES cards(id) ON DELETE CASCADE
     )
     `;
-  await sql`CREATE INDEX cards_decks_idx ON cards_decks (deck_id, card_id)`;
+  await sql`CREATE UNIQUE INDEX cards_decks_idx ON cards_decks (deck_id, card_id)`;
 };
 
 exports.down = async (sql) => {

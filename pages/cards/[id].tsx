@@ -2,7 +2,6 @@ import SingleCard from '@/components/single-card/single-card';
 import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
-import { logDebug } from '@/lib/utils';
 import URLS from '@/lib/urls';
 
 type SingleCardProps = {
@@ -13,7 +12,6 @@ type SingleCardProps = {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allCardIds = await rpc.cards.getAllIDs();
-  logDebug(`(getStaticPaths) generating static paths for card ids:`, allCardIds);
   return {
     paths: allCardIds.map((id) => URLS.cards.item(id)),
     fallback: false,
@@ -22,9 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 // fetch current card details, and IDs of prev/next cards
 async function getData(id: string): Promise<SingleCardProps> {
-  logDebug('(getData) cardId:', id);
   const card = await rpc.cards.get(id); // get the individual card
-  logDebug('(getData) card:', JSON.stringify(card));
 
   if (!card) {
     throw new Error(`failed to get card data: card_id: ${id}`);

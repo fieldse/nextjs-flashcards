@@ -26,7 +26,7 @@ export default function CardsPage({ cards }: { cards: Card[] }) {
   return (
     <div className="w-full mt-16">
       <MainHeading>Cards</MainHeading>
-      <CardsTable cards={cards} />;
+      <CardsTable cards={cards} title="All cards" />;
     </div>
   );
 }
