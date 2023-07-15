@@ -59,3 +59,15 @@ export async function getDeckCards(deckId: number) {
     cards,
   };
 }
+
+/**
+ * Get card IDs for a deck
+ */
+export async function getDeckCardIds(deckId: number) {
+  const q = `
+    SELECT card_id FROM cards_decks cd
+    WHERE cd.deck_id = $1
+    ORDER BY id`;
+  const { rows } = await sql.query<{ id: number }>(q, [deckId]);
+  return rows.map((x) => x.id);
+}
