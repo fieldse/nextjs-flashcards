@@ -2,7 +2,7 @@ import SingleCard from '@/components/single-card/single-card';
 import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
-import URLS from '@/lib/urls';
+import urls from '@/lib/urls';
 
 type SingleCardProps = {
   card: Card;
@@ -13,7 +13,7 @@ type SingleCardProps = {
 export const getStaticPaths: GetStaticPaths = async () => {
   const allCardIds = await rpc.cards.getAllIDs();
   return {
-    paths: allCardIds.map((id) => URLS.cards.item(id)),
+    paths: allCardIds.map((id) => urls.cards.item(id)),
     fallback: false,
   };
 };

@@ -3,8 +3,7 @@ import { timeAgo } from '@/lib/utils';
 import { HiOutlineDocument } from 'react-icons/hi';
 import { Card } from '@/server/types';
 import Link from 'next/link';
-import URLS from '@/lib/urls';
-import { useParams } from 'next/navigation';
+import urls from '@/lib/urls';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -40,7 +39,7 @@ export function CardsTable({ title, cards }: Props) {
  * Single card row in card table
  */
 export function CardRow({ card, deckId }: { card: Card; deckId?: string }) {
-  const url = deckId ? URLS.decks.deckCard(deckId, card.id) : URLS.cards.item(card.id);
+  const url = deckId ? urls.decks.deckCard(deckId, card.id) : urls.cards.item(card.id);
   return (
     <Link key={`card-${card.id}`} href={url}>
       <div className="flex items-center justify-between py-3">

@@ -3,7 +3,7 @@ import * as rpc from '../../rpc';
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { DeckWithCardCount } from '@/server/types';
 import Link from 'next/link';
-import URLS from '@/lib/urls';
+import urls from '@/lib/urls';
 
 async function getData(): Promise<{ decks: DeckWithCardCount[] }> {
   const data = await rpc.decks.getAllWithCardCounts();
@@ -32,7 +32,7 @@ export async function DecksTable() {
       <div className="divide-y divide-gray-900/5">
         {decks.map((deck) => (
           <div key={`deck-${deck.id}`} className="flex items-start justify-between py-3">
-            <Link href={URLS.decks.item(deck.id)}>
+            <Link href={urls.decks.item(deck.id)}>
               <div className="flex items-center justify-between space-x-4 w-full">
                 {/* Deck title and icon */}
                 <span className="flex flex-col">
