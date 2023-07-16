@@ -97,7 +97,7 @@ const Btn = ({
   return (
     <button type="button" className={`${className || ''}`} onClick={action} title={title}>
       <span
-        className={`flex justify-between space-x-2 ${
+        className={`flex justify-between space-x-2 items-center ${
           iconSide === 'left' ? 'flex-row-reverse' : ''
         }`}
       >

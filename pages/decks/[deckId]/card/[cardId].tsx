@@ -61,9 +61,9 @@ export default function DeckCard({
   const deckUrl = urls.decks.item(deck.id);
   return (
     <>
-      <span className="relative bottom-10 text-left">
+      <span className="relative bottom-20">
         <Link href={deckUrl} title={deckUrl}>
-          <HomeButton size={6} className="text-gray-600">
+          <HomeButton size={10} className="text-gray-600 text-lg">
             Deck: {deck.title}
           </HomeButton>
         </Link>
