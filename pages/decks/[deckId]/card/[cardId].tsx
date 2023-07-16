@@ -11,7 +11,7 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
     const card = await rpc.cards.get(cardId);
 
     // Prev/next cards, if existing
-    const cardIdx = cardIds.indexOf(cardId);
+    const cardIdx = cardIds.indexOf(card.id);
     const nextCardId = cardIds[cardIdx + 1];
     const prevCardId = cardIds[cardIdx - 1];
 
