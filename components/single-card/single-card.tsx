@@ -11,9 +11,8 @@ import urls from '@/lib/urls';
 
 type Props = {
   card: Card;
-  // fixm: urls should have some pre-rendering or checking
-  nextCardId?: number | null;
-  prevCardId?: number | null;
+  nextUrl?: string;
+  prevUrl?: string;
   showScoreButtons?: boolean;
   showNavigation?: boolean;
 };
@@ -23,8 +22,8 @@ type Props = {
  */
 export default function SingleCard({
   card,
-  nextCardId,
-  prevCardId,
+  nextUrl,
+  prevUrl,
   showScoreButtons = true,
   showNavigation = true,
 }: Props) {
@@ -49,8 +48,8 @@ export default function SingleCard({
       <div className="flex flex-col justify-between">
         <span className="flex flex-row justify-between">
           {/* Previous card nav button */}
-          {!!prevCardId && showNavigation && (
-            <PrevButtonArrow action={navigateCardAction(prevCardId)} />
+          {showNavigation && !!prevUrl && (
+            <PrevButtonArrow action={() => router.replace(prevUrl)} />
           )}
 
           {/* Title headword */}
@@ -70,8 +69,8 @@ export default function SingleCard({
           </span>
 
           {/* Next card nav button */}
-          {!!nextCardId && showNavigation && (
-            <NextButtonArrow action={navigateCardAction(nextCardId)} />
+          {showNavigation && !!nextUrl && (
+            <NextButtonArrow action={() => router.replace(nextUrl)} />
           )}
         </span>
 
@@ -87,9 +86,7 @@ export default function SingleCard({
         )}
 
         {/* Self-scoring buttons */}
-        {showDefinition && showScoreButtons && nextCardId && (
-          <ScoringButtons nextCardId={nextCardId} />
-        )}
+        {showDefinition && showScoreButtons && nextUrl && <ScoringButtons nextUrl={nextUrl} />}
       </div>
     </div>
   );
