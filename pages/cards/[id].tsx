@@ -3,6 +3,7 @@ import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
 import urls from '@/lib/urls';
+import CardBackground from '@/components/card-background';
 
 type SingleCardProps = {
   card: Card;
@@ -60,5 +61,9 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
  * View for a single card page
  */
 export default function SingleCardPage({ card, ...rest }: SingleCardProps) {
-  return <SingleCard card={card} {...rest} />;
+  return (
+    <CardBackground>
+      <SingleCard card={card} {...rest} />
+    </CardBackground>
+  );
 }
