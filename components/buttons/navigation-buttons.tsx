@@ -9,6 +9,7 @@ import {
 
 import { IconType } from 'react-icons';
 import Link from 'next/link';
+import { HiOutlineHome } from 'react-icons/hi2';
 
 /**
  * Props for generic navigation button
@@ -31,6 +32,13 @@ type IconButtonProps = NavigationButtonProps & {
   iconClass?: string;
 };
 /**
+ * "Homne" button with icon
+ */
+export function HomeButton(props: NavigationButtonProps) {
+  return <BasicButton {...props} icon={HiOutlineHome} iconClass="mr-4" iconSide="left" />;
+}
+
+/**
  * "Next" button with single arrow icon
  */
 export function NextButtonArrow(props: NavigationButtonProps) {
@@ -48,7 +56,7 @@ export function NextButtonDoubleArrow(props: NavigationButtonProps) {
  * "Prev" button with single arrow icon
  */
 export function PrevButtonArrow(props: NavigationButtonProps) {
-  return <BasicButton {...props} icon={HiOutlineArrowLeft} iconSide="right" />;
+  return <BasicButton {...props} icon={HiOutlineArrowLeft} iconSide="left" />;
 }
 
 /**
@@ -63,15 +71,15 @@ export function PrevButtonDoubleArrow(props: NavigationButtonProps) {
  * Accepts either action or href parameter;
  * If both passed, 'action' will be ignored.
  */
-function BasicButton(props: IconButtonProps) {
-  const { href, size, action, ...rest } = props;
+export function BasicButton(props: IconButtonProps) {
+  const { href, size, iconClass, action, ...rest } = props;
   const dimensions = `w-${size || 12} h-${size || 12}`;
   if (href) {
     <Link href={href} title={props.title || href}>
-      <Btn iconClass={dimensions} {...rest} />;
+      <Btn iconClass={`${iconClass} ${dimensions}`} {...rest} />;
     </Link>;
   }
-  return <Btn action={action} iconClass={dimensions} {...rest} />;
+  return <Btn action={action} iconClass={`${iconClass} ${dimensions}`} {...rest} />;
 }
 
 /**

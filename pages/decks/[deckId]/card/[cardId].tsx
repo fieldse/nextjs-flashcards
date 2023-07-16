@@ -3,8 +3,8 @@ import { Card, Deck } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import urls from '@/lib/urls';
 import SingleCard from '@/components/single-card/single-card';
-import { Heading3, MainHeading } from '@/components/headers';
 import CardBackground from '@/components/card-background';
+import { HomeButton } from '@/components/buttons/navigation-buttons';
 
 export const getStaticProps: GetStaticProps = async (ctx: any) => {
   const { deckId, cardId } = ctx.params;
@@ -58,11 +58,15 @@ export default function DeckCard({
   prevUrl?: string;
 }) {
   return (
-    <div>
-      <Heading3>Deck: {deck.title}</Heading3>
+    <>
+      <span className="relative bottom-10 text-left">
+        <HomeButton href={urls.decks.item(deck.id)} size={6} className="text-gray-600">
+          Deck: {deck.title}
+        </HomeButton>
+      </span>
       <CardBackground>
         <SingleCard card={card} {...rest} />
       </CardBackground>
-    </div>
+    </>
   );
 }
