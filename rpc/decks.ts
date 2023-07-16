@@ -59,3 +59,24 @@ export async function getDeckCards(deckId: number) {
     cards,
   };
 }
+
+/**
+ * Get card IDs for a deck
+ */
+export async function getDeckCardIds(deckId: number) {
+  const q = `
+    SELECT card_id "cardId" FROM cards_decks cd
+    WHERE cd.deck_id = $1
+    ORDER BY card_id`;
+  const { rows } = await sql.query<{ cardId: number }>(q, [deckId]);
+  return rows.map((x) => x.cardId);
+}
+
+/**
+ * Get all deck+cardId combinations // fixme: should remove this
+ */
+export async function getAllDeckCardIds() {
+  return await sql<{ deckId: number; cardId: number }>`
+    SELECT deck_id "deckId", card_id "cardId" FROM cards_decks cd
+    ORDER BY deck_id, card_id`;
+}

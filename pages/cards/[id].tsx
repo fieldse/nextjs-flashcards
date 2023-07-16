@@ -2,18 +2,19 @@ import SingleCard from '@/components/single-card/single-card';
 import { Card } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as rpc from '@/rpc';
-import URLS from '@/lib/urls';
+import urls from '@/lib/urls';
+import CardBackground from '@/components/card-background';
 
 type SingleCardProps = {
   card: Card;
-  nextCardId: number | null;
-  prevCardId: number | null;
+  nextUrl?: string | null; // null to allow JSON serialization
+  prevUrl?: string | null; // null to allow JSON serialization
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allCardIds = await rpc.cards.getAllIDs();
   return {
-    paths: allCardIds.map((id) => URLS.cards.item(id)),
+    paths: allCardIds.map((id) => urls.cards.item(id)),
     fallback: false,
   };
 };
@@ -29,12 +30,14 @@ async function getData(id: string): Promise<SingleCardProps> {
   const allCardIds = await rpc.cards.getAllIDs();
 
   // Prev/next cards, if existing
-  const nextCardId = allCardIds.find((x) => x === card.id + 1) || null; // null for allowing JSON serialization
-  const prevCardId = allCardIds.find((x) => x === card.id - 1) || null;
+  const cardIdx = allCardIds.indexOf(card.id);
+  const nextCardId = allCardIds[cardIdx + 1];
+  const prevCardId = allCardIds[cardIdx - 1];
+
   return {
     card: JSON.parse(JSON.stringify(card)),
-    nextCardId,
-    prevCardId,
+    nextUrl: nextCardId ? urls.cards.item(nextCardId) : null, // null to allow JSON serialization
+    prevUrl: prevCardId ? urls.cards.item(prevCardId) : null, // null to allow JSON serialization
   };
 }
 
@@ -57,6 +60,10 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
 /**
  * View for a single card page
  */
-export default function SingleCardPage({ card, nextCardId, prevCardId }: SingleCardProps) {
-  return <SingleCard card={card} nextCardId={nextCardId} prevCardId={prevCardId} />;
+export default function SingleCardPage({ card, ...rest }: SingleCardProps) {
+  return (
+    <CardBackground>
+      <SingleCard card={card} {...rest} />
+    </CardBackground>
+  );
 }

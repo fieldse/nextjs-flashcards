@@ -3,14 +3,14 @@ import { MainHeading } from '@/components/headers';
 import * as rpc from '@/rpc';
 import { Card, Deck } from '@/server/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import URLS from '@/lib/urls';
+import urls from '@/lib/urls';
 
 /**
  * Get deck details and cards
  */
-async function getDeckData(id: number) {
+async function getDeckData(deckId: number) {
   try {
-    const data = await rpc.decks.getDeckCards(id);
+    const data = await rpc.decks.getDeckCards(deckId);
     const parsed = JSON.parse(JSON.stringify(data));
     return { props: { ...parsed } };
   } catch (err) {
@@ -19,15 +19,17 @@ async function getDeckData(id: number) {
 }
 
 export const getStaticProps: GetStaticProps = async (ctx: any) => {
-  const { id } = ctx.params;
-  const data = await getDeckData(id);
+  const { deckId } = ctx.params;
+  const data = await getDeckData(deckId);
   return { ...data };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allDeckIds = await rpc.decks.getAllIDs();
+  const deckPaths = allDeckIds.map((id) => urls.decks.item(id));
+
   return {
-    paths: allDeckIds.map((id) => URLS.decks.item(id)),
+    paths: [...deckPaths],
     fallback: false,
   };
 };
