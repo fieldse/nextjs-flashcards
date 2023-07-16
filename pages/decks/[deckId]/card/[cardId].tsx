@@ -12,13 +12,16 @@ export const getStaticProps: GetStaticProps = async (ctx: any) => {
 
     // Prev/next cards, if existing
     const cardIdx = cardIds.indexOf(cardId);
-    const nextCardId = cardIds[cardIdx + 1] || null;
-    const prevCardId = cardIds[cardIdx - 1] || null;
+    const nextCardId = cardIds[cardIdx + 1];
+    const prevCardId = cardIds[cardIdx - 1];
+
+    const nextUrl = nextCardId ? urls.decks.deckCard(deckId, nextCardId) : null;
+    const prevUrl = prevCardId ? urls.decks.deckCard(deckId, prevCardId) : null;
 
     const data = {
       card: JSON.parse(JSON.stringify(card)),
-      nextCardId,
-      prevCardId,
+      nextUrl,
+      prevUrl,
     };
     return { props: data };
   } catch (err) {
@@ -39,13 +42,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 type Props = {
   card: Card;
-  nextCardId: number;
-  prevCardId: number;
+  nextUrl?: string;
+  prevUrl?: string;
 };
 
 /**
  * View for single card within deck browse view
  */
-export default function DeckCard({ card, nextCardId, prevCardId }: Props) {
-  return <SingleCard card={card} nextCardId={nextCardId} prevCardId={prevCardId} />;
+export default function DeckCard({ card, ...rest }: Props) {
+  return <SingleCard card={card} {...rest} />;
 }

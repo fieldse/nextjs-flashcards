@@ -11,8 +11,8 @@ import urls from '@/lib/urls';
 
 type Props = {
   card: Card;
-  nextUrl?: string;
-  prevUrl?: string;
+  nextUrl?: string | null; // null to allow JSON serialization
+  prevUrl?: string | null; // null to allow JSON serialization
   showScoreButtons?: boolean;
   showNavigation?: boolean;
 };
@@ -32,11 +32,6 @@ export default function SingleCard({
 
   // FIXME: placeholder
   const partOfSpeech = '(n.)';
-
-  // Go to previous or next card
-  const navigateCardAction = (cardId: number) => {
-    return () => router.replace(urls.cards.item(cardId));
-  };
 
   // Reset hide definition on route change
   useEffect(() => {
