@@ -11,6 +11,7 @@ import { IconType } from 'react-icons';
 
 type NavigationButtonProps = {
   className?: string;
+  title?: string;
   action?: () => void;
   size?: number; // size, in a Tailwinds w/h number
   children?: React.ReactNode;
@@ -51,10 +52,10 @@ export function PrevButtonDoubleArrow(props: NavigationButtonProps) {
 function BasicButton(
   props: NavigationButtonProps & { icon: IconType; iconSide?: 'right' | 'left' },
 ) {
-  const { size, icon, className, action, children, iconSide } = props;
+  const { size, title, icon, className, action, children, iconSide } = props;
   const dimensions = `w-${size || 12} h-${size || 12}`;
   return (
-    <button type="button" className={`${className || ''}`} onClick={action}>
+    <button type="button" className={`${className || ''}`} onClick={action} title={title}>
       <span
         className={`flex justify-between space-x-2 ${
           iconSide === 'left' ? 'flex-row-reverse' : ''

@@ -44,7 +44,7 @@ export default function SingleCard({
         <span className="flex flex-row justify-between">
           {/* Previous card nav button */}
           {showNavigation && !!prevUrl && (
-            <PrevButtonArrow action={() => router.replace(prevUrl)} />
+            <PrevButtonArrow title={prevUrl} action={() => router.replace(prevUrl)} />
           )}
 
           {/* Title headword */}
@@ -65,7 +65,7 @@ export default function SingleCard({
 
           {/* Next card nav button */}
           {showNavigation && !!nextUrl && (
-            <NextButtonArrow action={() => router.replace(nextUrl)} />
+            <NextButtonArrow title={nextUrl} action={() => router.replace(nextUrl)} />
           )}
         </span>
 
