@@ -26,7 +26,9 @@ export function CardsTable({ title, cards }: Props) {
       </div>
       <div className="divide-y divide-gray-900/5">
         {cards.length ? (
-          cards.map((card) => <CardRow card={card} deckId={deckId as string} />)
+          cards.map((card) => (
+            <CardRow key={`card-row-${card.id}`} card={card} deckId={deckId as string} />
+          ))
         ) : (
           <div>Cards data empty</div>
         )}
