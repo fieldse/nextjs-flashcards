@@ -8,15 +8,28 @@ import {
 } from 'react-icons/hi';
 
 import { IconType } from 'react-icons';
+import Link from 'next/link';
 
+/**
+ * Props for generic navigation button
+ */
 type NavigationButtonProps = {
   className?: string;
   title?: string;
   action?: () => void;
-  size?: number; // size, in a Tailwinds w/h number
+  href?: string;
+  size?: number; // size, in a Tailwinds width/height number
   children?: React.ReactNode;
 };
 
+/**
+ * Props for button with icon
+ */
+type IconButtonProps = NavigationButtonProps & {
+  icon: IconType;
+  iconSide?: 'right' | 'left';
+  iconClass?: string;
+};
 /**
  * "Next" button with single arrow icon
  */
@@ -47,13 +60,32 @@ export function PrevButtonDoubleArrow(props: NavigationButtonProps) {
 
 /**
  * Basic navigation button, accepts icon param and which side it should be on
- * TODO: add support for href attribute
+ * Accepts either action or href parameter;
+ * If both passed, 'action' will be ignored.
  */
-function BasicButton(
-  props: NavigationButtonProps & { icon: IconType; iconSide?: 'right' | 'left' },
-) {
-  const { size, title, icon, className, action, children, iconSide } = props;
+function BasicButton(props: IconButtonProps) {
+  const { href, size, action, ...rest } = props;
   const dimensions = `w-${size || 12} h-${size || 12}`;
+  if (href) {
+    <Link href={href} title={props.title || href}>
+      <Btn iconClass={dimensions} {...rest} />;
+    </Link>;
+  }
+  return <Btn action={action} iconClass={dimensions} {...rest} />;
+}
+
+/**
+ * Inner class for BasicButton
+ */
+const Btn = ({
+  className,
+  action,
+  title,
+  icon,
+  iconSide,
+  children,
+  iconClass,
+}: IconButtonProps) => {
   return (
     <button type="button" className={`${className || ''}`} onClick={action} title={title}>
       <span
@@ -62,8 +94,8 @@ function BasicButton(
         }`}
       >
         {children}
-        {icon({ className: dimensions })}
+        {icon({ className: iconClass })}
       </span>
     </button>
   );
-}
+};
