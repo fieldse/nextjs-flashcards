@@ -32,7 +32,7 @@ type IconButtonProps = NavigationButtonProps & {
   iconClass?: string;
 };
 /**
- * "Homne" button with icon
+ * "Home" button with icon
  */
 export function HomeButton(props: NavigationButtonProps) {
   return <BasicButton {...props} icon={HiOutlineHome} iconClass="mr-4" iconSide="left" />;

@@ -5,6 +5,7 @@ import urls from '@/lib/urls';
 import SingleCard from '@/components/single-card/single-card';
 import CardBackground from '@/components/card-background';
 import { HomeButton } from '@/components/buttons/navigation-buttons';
+import Link from 'next/link';
 
 export const getStaticProps: GetStaticProps = async (ctx: any) => {
   const { deckId, cardId } = ctx.params;
@@ -57,12 +58,15 @@ export default function DeckCard({
   nextUrl?: string;
   prevUrl?: string;
 }) {
+  const deckUrl = urls.decks.item(deck.id);
   return (
     <>
       <span className="relative bottom-10 text-left">
-        <HomeButton href={urls.decks.item(deck.id)} size={6} className="text-gray-600">
-          Deck: {deck.title}
-        </HomeButton>
+        <Link href={deckUrl} title={deckUrl}>
+          <HomeButton size={6} className="text-gray-600">
+            Deck: {deck.title}
+          </HomeButton>
+        </Link>
       </span>
       <CardBackground>
         <SingleCard card={card} {...rest} />
